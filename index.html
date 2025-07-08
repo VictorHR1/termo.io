@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Equipamento - CCM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --azul-escuro: #224080;
+      --azul-claro: #00B2CA;
+      --cinza-claro: #f4f4f4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--cinza-claro);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      max-width: 140px;
+    }
+
+    h2 {
+      color: var(--azul-escuro);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--azul-claro);
+      outline: none;
+    }
+
+    button {
+      background-color: var(--azul-escuro);
+      color: #fff;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1a3366;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">
+      <img src="CCM.png" alt="Logo CCM">
+    </div>
+
+    <h2>Cadastro de Equipamento</h2>
+
+    <form id="equipForm">
+      <div class="form-group">
+        <label for="tipo_termo">Tipo de Termo</label>
+        <select id="tipo_termo" required>
+          <option value="" disabled selected>Selecione...</option>
+          <option value="notebook">Notebook</option>
+          <option value="celular">Celular</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="st_name">Nome</label>
+        <input type="text" id="st_name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cod_cpf">CPF</label>
+        <input type="text" id="cod_cpf" required>
+      </div>
+
+      <!-- CAMPOS NOTEBOOK -->
+      <div id="campos-notebook" class="hidden">
+        <div class="form-group">
+          <label for="amodel0">Marca</label>
+          <input type="text" id="amodel0">
+        </div>
+
+        <div class="form-group">
+          <label for="amodel1">Modelo</label>
+          <input type="text" id="amodel1">
+        </div>
+
+        <div class="form-group">
+          <label for="amodel2">Memória RAM (GB)</label>
+          <input type="text" id="amodel2">
+        </div>
+
+        <div class="form-group">
+          <label for="amodel3">SSD (GB)</label>
+          <input type="text" id="amodel3">
+        </div>
+
+        <div class="form-group">
+          <label for="st_condic">Condição</label>
+          <select id="st_condic">
+            <option value="" disabled selected>Selecione...</option>
+            <option value="Novo">Novo</option>
+            <option value="Usado">Usado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="n_pat">Número de Patrimônio</label>
+          <input type="text" id="n_pat">
+        </div>
+      </div>
+
+      <!-- CAMPOS CELULAR -->
+      <div id="campos-celular" class="hidden">
+        <div class="form-group">
+          <label for="amodel_cel">Modelo</label>
+          <input type="text" id="amodel_cel">
+        </div>
+
+        <div class="form-group">
+          <label for="imei1">IMEI 1</label>
+          <input type="text" id="imei1">
+        </div>
+
+        <div class="form-group">
+          <label for="imei2">IMEI 2</label>
+          <input type="text" id="imei2">
+        </div>
+
+        <div class="form-group">
+          <label for="st_condic_cel">Condição</label>
+          <select id="st_condic_cel">
+            <option value="" disabled selected>Selecione...</option>
+            <option value="Novo">Novo</option>
+            <option value="Usado">Usado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cod_setor">Setor do Equipamento</label>
+        <input type="text" id="cod_setor" required>
+      </div>
+
+      <div class="form-group">
+        <label for="vl_price">Valor do Equipamento (R$)</label>
+        <input type="number" step="0.01" id="vl_price" required>
+      </div>
+
+      <button type="submit">Gerar Termo</button>
+    </form>
+  </div>
+
+  <script>
+    const tipoTermo = document.getElementById('tipo_termo');
+    const camposNotebook = document.getElementById('campos-notebook');
+    const camposCelular = document.getElementById('campos-celular');
+
+    tipoTermo.addEventListener('change', () => {
+      if (tipoTermo.value === 'notebook') {
+        camposNotebook.classList.remove('hidden');
+        camposCelular.classList.add('hidden');
+      } else {
+        camposNotebook.classList.add('hidden');
+        camposCelular.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('equipForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const tipo = tipoTermo.value;
+      const st_name = document.getElementById('st_name').value;
+      const cod_cpf = document.getElementById('cod_cpf').value;
+      const cod_setor = document.getElementById('cod_setor').value;
+      const vl_price = document.getElementById('vl_price').value;
+
+      const params = new URLSearchParams({
+        tipo,
+        st_name,
+        cod_cpf,
+        cod_setor,
+        vl_price
+      });
+
+      if (tipo === 'notebook') {
+        params.append('amodel0', document.getElementById('amodel0').value);
+        params.append('amodel1', document.getElementById('amodel1').value);
+        params.append('amodel2', document.getElementById('amodel2').value);
+        params.append('amodel3', document.getElementById('amodel3').value);
+        params.append('st_condic', document.getElementById('st_condic').value);
+        params.append('n_pat', document.getElementById('n_pat').value);
+      } else if (tipo === 'celular') {
+        params.append('amodel_cel', document.getElementById('amodel_cel').value);
+        params.append('imei1', document.getElementById('imei1').value);
+        params.append('imei2', document.getElementById('imei2').value);
+        params.append('st_condic', document.getElementById('st_condic_cel').value);
+      }
+
+      window.location.href = `texto.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>

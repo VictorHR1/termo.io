@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Termo de Responsabilidade</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 3cm 2cm 2cm 3cm;
+    }
+
+    body {
+      font-family: "Times New Roman", serif;
+      font-size: 12pt;
+      background-color: white;
+      color: black;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pagina {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 0;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    .conteudo {
+      page-break-inside: avoid;
+    }
+
+    .logo {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      max-width: 160px;
+    }
+
+    .titulo {
+      text-align: center;
+      font-weight: bold;
+      font-size: 14pt;
+      margin: 10px 0 30px 0;
+      text-transform: uppercase;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    #texto-gerado {
+      margin: 0 20px;
+      text-align: justify;
+    }
+
+    .assinatura {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .assinatura div {
+      margin-top: 80px;
+    }
+
+    @media print {
+      .no-print {
+        display: none;
+      }
+    }
+
+    .btn-print {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      font-size: 14px;
+      background-color: #224080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-print:hover {
+      background-color: #1a3366;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pagina">
+    <div class="conteudo" id="termo">
+      <div class="logo">
+        <img src="CCM.png" alt="Logo CCM">
+      </div>
+
+      <div class="titulo">
+        TERMO DE RESPONSABILIDADE PARA UTILIZAÇÃO DE NOTEBOOK/CELULAR/CHIP DA EMPRESA
+      </div>
+
+      <div id="texto-gerado"></div>
+
+      <div class="assinatura">
+        Uberaba/MG, ___ de ______________ de 2025.
+        <div>______________________________________<br>Nome colaborador</div>
+      </div>
+    </div>
+
+    <button class="btn-print no-print" onclick="window.print()">Imprimir Termo</button>
+  </div>
+
+  <script>
+    const p = new URLSearchParams(window.location.search);
+
+    const tipo = p.get("tipo");
+    const st_name = p.get("st_name");
+    const cod_cpf = p.get("cod_cpf");
+    const cod_setor = p.get("cod_setor");
+    const vl_price = parseFloat(p.get("vl_price")).toFixed(2);
+
+    let texto = "";
+
+    if (tipo === "notebook") {
+      const amodel = [
+        p.get("amodel0"),
+        p.get("amodel1"),
+        p.get("amodel2"),
+        p.get("amodel3")
+      ];
+      const st_condic = p.get("st_condic");
+      const n_pat = p.get("n_pat");
+
+      texto = `
+Pelo presente instrumento particular, a CCM INDUSTRIA E COMERCIO DE PRODUTOS DESCARTAVEIS S.A., situada a Av. Cel Zacarias Borges de Araújo, 1077 inscrita no CNPJ sob o nº 12.288.046/0001-37, entrega neste ato, ao colaborador(a) ${st_name}, inscrito(a) no CPF ${cod_cpf}, o equipamento eletrônico a seguir discriminado:
+
+Descrição do equipamento:  
+Aparelho: NOTEBOOK
+Modelo: ${amodel[0]} | ${amodel[1]} | ${amodel[2]} GB RAM | SSD de ${amodel[3]}
+Condição: ${st_condic}
+Patrimônio: ${n_pat}
+Itens: Carregador
+Setor: ${cod_setor}
+Valor: R$ ${vl_price}
+
+O presente termo será regido nas seguintes condições:
+1. O equipamento deverá ser utilizado ÚNICA e EXCLUSIVAMENTE a serviço da empresa tendo em vista a atividade exercida pelo EMPREGADO.
+2. O aparelho descrito ficará sob a guarda e disposição do EMPREGADO ininterruptamente, comprometendo-se o EMPREGADO a devolvê-lo quando solicitado pela EMPREGADORA, nas mesmas condições que os recebeu, salvo os desgastes naturais decorrentes do uso normal do aparelho.
+3. O EMPREGADO deverá devolver o aparelho e seus acessórios à EMPREGADORA em até 24 (vinte e quatro) horas, contados da solicitação de devolução.
+4. Caso haja recusa, tácita ou expressa, da devolução do aparelho no prazo estipulado sem justo motivo que configure mero atraso, tal postura, ensejará o pagamento de multa e ainda será passível de falta grave, podendo ensejar a dispensa por justa causa nos termos do art. 482 da CLT.
+5. O EMPREGADO autoriza desde já descontos mensais em sua remuneração no importe de 30% em decorrência de extravio ou danificações ao aparelho. 
+6. O EMPREGADO deverá:
+• Utilizar o aparelho exclusivamente para o fim a que se destina, mantendo-o como se seu próprio fosse ficando responsável pelo uso e conservação do equipamento;
+• Utilizar o aparelho EXCLUSIVAMENTE nas dependências da empresa;
+• Não utilizar o aparelho para fins particulares ou ilícitos;
+• Utilizar o aparelho corretamente, sendo vedada a sublocação, cessão ou transferência a terceiro sem prévio e expresso consentimento da EMPREGADORA;
+• Responsabilizar-se por qualquer dano, prejuízo ou inutilização do aparelho, decorrente de seus atos ou omissões, ou pelo descumprimento de qualquer de suas obrigações previstas neste instrumento.
+7. O EMPREGADO tem somente a detenção, tendo em vista o uso exclusivo para prestação de serviços profissionais e não a propriedade do equipamento, sendo terminantemente proibido o empréstimo, aluguel ou cessão deste a terceiros.
+8. Em razão do quanto previsto no artigo 462, § 1º da CLT, a EMPREGADORA está autorizada a descontar diretamente de seu salário os valores necessários para a reparação/indenização dos danos causados no aparelho.
+
+Ciente e de acordo com o presente termo.
+      `;
+    } else if (tipo === "celular") {
+      const modelo = p.get("amodel_cel");
+      const imei1 = p.get("imei1");
+      const imei2 = p.get("imei2");
+      const st_condic = p.get("st_condic");
+
+      texto = `
+Pelo presente instrumento particular, a CCM INDUSTRIA E COMERCIO DE PRODUTOS DESCARTAVEIS S.A., situada a Av. Cel Zacarias Borges de Araújo, 1077 inscrita no CNPJ sob o nº 12.288.046/0001-37, entrega neste ato, ao colaborador(a) ${st_name}, inscrito(a) no CPF ${cod_cpf} o equipamento eletrônico a seguir discriminado:
+
+Descrição do equipamento:  
+Aparelho de celular 
+Modelo: ${modelo}
+Condição: ${st_condic}
+IMEI : ${imei1}
+IMEI2: ${imei2}
+Setor: ${cod_setor}
+Valor do item: R$${vl_price}
+
+O presente termo será regido nas seguintes condições:
+1. O equipamento deverá ser utilizado ÚNICA e EXCLUSIVAMENTE a serviço da empresa tendo em vista a atividade exercida pelo EMPREGADO.
+2. O aparelho descrito ficará sob a guarda e disposição do EMPREGADO ininterruptamente, comprometendo-se o EMPREGADO a devolvê-lo quando solicitado pela EMPREGADORA, nas mesmas condições que os recebeu, salvo os desgastes naturais decorrentes do uso normal do aparelho.
+3. O EMPREGADO deverá devolver o aparelho e seus acessórios à EMPREGADORA em até 24 (vinte e quatro) horas, contados da solicitação de devolução.
+4. Caso haja recusa, tácita ou expressa, da devolução do aparelho no prazo estipulado sem justo motivo que configure mero atraso, tal postura, ensejará o pagamento de multa e ainda será passível de falta grave, podendo ensejar a dispensa por justa causa nos termos do art. 482 da CLT.
+5. O EMPREGADO autoriza desde já descontos mensais em sua remuneração no importe de 30% em decorrência de extravio ou danificações ao aparelho. 
+6. O EMPREGADO deverá:
+• Utilizar o aparelho exclusivamente para o fim a que se destina, mantendo-o como se seu próprio fosse ficando responsável pelo uso e conservação do equipamento;
+• Utilizar o aparelho EXCLUSIVAMENTE nas dependências da empresa;
+• Não utilizar o aparelho para fins particulares ou ilícitos;
+• Utilizar o aparelho corretamente, sendo vedada a sublocação, cessão ou transferência a terceiro sem prévio e expresso consentimento da EMPREGADORA;
+• Responsabilizar-se por qualquer dano, prejuízo ou inutilização do aparelho, decorrente de seus atos ou omissões, ou pelo descumprimento de qualquer de suas obrigações previstas neste instrumento.
+7. O EMPREGADO tem somente a detenção, tendo em vista o uso exclusivo para prestação de serviços profissionais e não a propriedade do equipamento, sendo terminantemente proibido o empréstimo, aluguel ou cessão deste a terceiros.
+8. Em razão do quanto previsto no artigo 462, § 1º da CLT, a EMPREGADORA está autorizada a descontar diretamente de seu salário os valores necessários para a reparação/indenização dos danos causados no aparelho.
+
+Ciente e de acordo com o presente termo.
+      `;
+    }
+
+    document.getElementById("texto-gerado").innerHTML = `<pre>${texto.trim()}</pre>`;
+  </script>
+</body>
+</html>
